@@ -33,5 +33,3 @@ Interface Usuário-Amigável:
 
 - Design intuitivo com campos de entrada claras e botões de ação.
 - Feedback visual imediato para transições entre sistemas.
-
-> > > > > > > 742a0942f55442f3d1c89c584bbfe23df6d0f60f
