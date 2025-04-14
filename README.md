@@ -1,7 +1,3 @@
-# BitwiseWizard
-
-# PROJETO 1. Simulador de Sistemas de Numeração
-
 ## **BitwiseWizard**
 
 ---
