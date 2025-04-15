@@ -1,185 +1,89 @@
 #include <iostream>
+#include <string>
 #include "functions.h"
+#include "colors.h"
 
 using namespace std;
 
 int main(){
   // Declarar variaveis
-  int opc_1;
+  int opc;
+  int base_s;
+  int base_e;
+  
+  string num =  "";
+  string binary = "";
   
   for(;;){
-    cout << "***BitwiseWizard***" << endl << endl;
+    cout << GREEN << "***BitwiseWizard***" << RESET << endl << endl;
     cout << "[1] - Converter bases." << endl;
     cout << "[2] - Operacoes aritmeticas." << endl;
     cout << "[0] - Sair. " << endl;
     cout << ">> ";
     
-    cin >> opc_1;
+    cin >> opc;
+    cout << endl;
     
-    if(opc_1 == 1){
-      int opc_2 = menu_bases();
+    if(opc == 1){
+      cout << BOLD << "CONVERSOR DE BASES" << RESET << endl << endl;
+      cin.ignore();
+      cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+      cout << "Digite o numero: ";
+      getline(cin, num);
+
+      cout << "Digite a base de saida (2, 8, 10, 16): ";
+      cin >> base_s;
       
-      if(opc_2 == 1){
-        // Binaria
-        int opc_3;
-        
-        cout << "Base Binaria para:" << endl;
-        cout << "[1] - Base Octal." << endl;
-        cout << "[2] - Base Decimal." << endl;
-        cout << "[3] - Base Hexadecimal." << endl;
-        cout << "[0] - Sair." << endl;
+      base_e = detectBase(num);
 
-        
-        cin >> opc_3;
-        
-        if(opc_3 == 1){
-          continue;
-        }
-        if(opc_3 == 2){
-          continue;
-        }
-        if(opc_3 == 3){
-          continue;
-        }
-        if(opc_3 == 0){
-          cout << "Saindo............................" << endl;
-          break;
-        }
+      if(base_e == base_s){
+        cout << "Bases iguais" << endl << endl;
         continue;
-        
-      }
-      if(opc_2 == 2){
-        // Octal
-        int opc_3;
-        
-        cout << "Base Octal para:" << endl;
-        cout << "[1] - Base Binaria." << endl;
-        cout << "[2] - Base Decimal." << endl;
-        cout << "[3] - Base Hexadecimal." << endl;
-        cout << "[0] - Sair." << endl;
-        
-        cin >> opc_3;
-        if(opc_3 == 1){
+      } 
+      else{
+        if(base_s == 2){
+          binary = decimalBinary(baseToDecimal(num, base_e));
+          cout << BOLD <<  num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+          cout << BOLD << "Resultado: " << RESET << binary << endl << endl;
+          
           continue;
         }
-        if(opc_3 == 2){
-          continue;
-        }
-        if(opc_3 == 3){
-          continue;
-        }
-        if(opc_3 == 0){
-          cout << "Saindo............................" << endl;
-          break;
-        }
-        continue;
-        
-      }
-      if(opc_2 == 3){
-        // Decimal
-        int opc_3;
-        
-        cout << "Base Decimal para:" << endl;
-        cout << "[1] - Base Binaria." << endl;
-        cout << "[2] - Base Octal." << endl;
-        cout << "[3] - Base Hexadecimal." << endl;
-        cout << "[0] - Sair." << endl;
-        
-        cin >> opc_3;
-        if(opc_3 == 1){
-          continue;
-        }
-        if(opc_3 == 2){
-          continue;
-        }
-        if(opc_3 == 3){
-          continue;
-        }
-        if(opc_3 == 0){
-          cout << "Saindo............................" << endl;
-          break;
-        }
-        continue;
-        
-      }
-      if(opc_2 == 4){
-        // Hexadecimal
-        int opc_3;
+        //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
+        // Fazer função para transformar o int que retorna do baseToDecimal em string
+        else if(base_s == 8){
 
-        cout << "Base Hexadecimal para:" << endl;
-        cout << "[1] - Base Binaria." << endl;
-        cout << "[2] - Base Octal." << endl;
-        cout << "[3] - Base Decimal." << endl;
-        cout << "[0] - Sair." << endl;
-        
-        cin >> opc_3;
-        for(;;){
-          if(opc_3 == 1){
-            continue;
-          }
-          if(opc_3 == 2){
-            continue;
-          }
-          if(opc_3 == 3){
-            continue;
-          }
-          if(opc_3 == 0){
-            cout << "Saindo............................" << endl;
-            break;
-          }
+          continue;
         }
-        continue;
+        else if(base_s == 10){
+          string decimal = to_string(baseToDecimal(num, base_e));
+          
+          cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+          cout << BOLD << "Resultado: " << RESET << decimal << endl << endl;
+          continue;
+        }
+        else if(base_s == 16){
 
-      }
-      if(opc_2 == 0){
-        cout << "Saindo............................" << endl;
-        break;
-    }
-    continue;
-    }
-
-    if(opc_1 == 2){
-      int opc_4;
-
-      cout << "**Operacoes Aritmeticas**" << endl;
-      cout << "Escolha a operacao: " << endl;
-      cout << "[1] - Soma." << endl;
-      cout << "[2] - Subtracao." << endl;
-      cout << "[3] - Multiplicacao." << endl;
-      cout << "[4] - Divisao." << endl;
-      cout << "[0] - Sair." << endl;
-      cout << ">> ";
-
-      cin >> opc_4;
-      if(opc_4 == 1){
-        // Soma
-        int opc_5 = menu_bases();
-        continue;
-      }
-      if(opc_4 == 2){
-        // Subtração
-        int opc_5 = menu_bases();
-        continue;
-      }
-      if(opc_4 == 3){
-        // Multiplicação
-        int opc_5 = menu_bases();
-        continue;
-      }
-      if(opc_4 == 4){
-        // Divisão
-        int opc_5 = menu_bases();
-        continue;
-      }
-      if(opc_4 == 0){
-        cout << "Saindo............................" << endl;
-        break;
+          continue;
+        }
+        else{
+          cout << "Base não comportada" << endl << endl;
+          continue;
+        }
       }
       continue;
     }
-    if(opc_1 == 0){
-      cout << "Saindo............................" << endl;
+    else if(opc == 2){
+      cout << BOLD << "OPERACOES ARITMETICAS" <<  RESET << endl;
+
+      continue;
+    }
+    else if(opc == 0){
+      cout << RED << "Saindo............................" << RESET << endl;
       break;
+    }
+    else {
+      cout << RED << "Opcao invalida" << RESET << endl;
+      continue;
     }
   }
   return 0;
