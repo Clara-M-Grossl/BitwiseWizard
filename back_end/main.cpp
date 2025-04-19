@@ -1,9 +1,6 @@
 #include <iostream>
-#include <string>
 #include "functions.h"
 #include "colors.h"
-
-using namespace std;
 
 int main(){
   // Declarar variaveis
@@ -11,6 +8,7 @@ int main(){
   int opc_arit;
   int base_s;
   int base_e;
+  int tipo_bin;
   
   string num =  "";
   string num1 = "";
@@ -45,14 +43,43 @@ int main(){
       } 
       else{
         if(base_s == 2){
-          binary = decimalBinary(baseToDecimal(num, base_e));
+          cout << "Escolha o formato" << endl;
+          cout << "[1] - Binario sem sinal" << endl;
+          cout << "[2] - Sinal magnetude" << endl;
+          cout << "[3] - Complemento de 1" << endl;
+          cout << "[4] - Complemento de 2" << endl;
+          cout << "[0] - Sair" << endl;
+          cout << ">> ";
+          cin >> tipo_bin;
+
+          if(tipo_bin == 1){
+            binary = decimalBinary(baseToDecimal(num, base_e));
+          }
+          else if(tipo_bin == 2){
+            binary = toSignedMagnitude(baseToDecimal(num, base_e));
+          }
+          else if(tipo_bin == 3){
+            binary = toOnesComplement(baseToDecimal(num, base_e));
+          }
+          else if(tipo_bin == 4){
+            binary = toTwosComplement(baseToDecimal(num, base_e));
+          }
+          else if(tipo_bin == 0){
+            cout << RED << "Saindo............................" << RESET << endl;
+            break;
+          }
+          else{
+            cout << RED << "Opcao invalida" << RESET << endl;
+            continue;
+          }
+
           cout << BOLD <<  num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
           cout << BOLD << "Resultado: " << RESET << binary << endl << endl;
           
           continue;
         }
         //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
-        // Fazer função para transformar o int que retorna do baseToDecimal em string
+        // Fazer função para transformar o int que retorna do baseToDecimal em string => existe uma função pra isso => to_string()
         else if(base_s == 8){
 
           continue;
@@ -82,7 +109,7 @@ int main(){
       cout << "1. Soma, 2. subtracao, 3. multiplicacao ou 4. divisao?" <<endl;
       cin >> opc_arit;
       if (opc_arit == 1){
-        cout << BOLD << "SOMA" <<  RESET << endl;cin.ignore();
+        cout << BOLD << "SOMA" <<  RESET << endl;
         cin.ignore();
         cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
         cout << "Digite o numero: ";
