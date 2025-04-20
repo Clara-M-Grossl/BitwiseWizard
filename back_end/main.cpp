@@ -142,7 +142,7 @@ int main(){
         base_e = detectBase(num1);
         base_e2 = detectBase(num2);
 
-        res = sum(num1, num2, base_e, base_e2);
+        res = sub(num1, num2, base_e, base_e2);
         cout << BOLD << num1 << RESET << " - " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
       else if(opc_arit == 3){
@@ -159,7 +159,7 @@ int main(){
         base_e = detectBase(num1);
         base_e2 = detectBase(num2);
 
-        res = sum(num1, num2, base_e, base_e2);
+        res = mult(num1, num2, base_e, base_e2);
         cout << BOLD << num1 << RESET << " * " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
       else if(opc_arit == 4){//verificar ponto flutuante
@@ -176,7 +176,7 @@ int main(){
         base_e = detectBase(num1);
         base_e2 = detectBase(num2);
 
-        res = sum(num1, num2, base_e, base_e2);
+        res = div(num1, num2, base_e, base_e2);
         cout << BOLD << num1 << RESET << " / " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
       else{
