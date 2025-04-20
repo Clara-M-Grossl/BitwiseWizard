@@ -8,11 +8,13 @@ int main(){
   int opc_arit;
   int base_s;
   int base_e;
+  int base_e2;
   int tipo_bin;
   
   string num =  "";
   string num1 = "";
   string num2 = "";
+  string res = "";
   string binary = "";
   
   for(;;){
@@ -110,34 +112,72 @@ int main(){
       cin >> opc_arit;
       if (opc_arit == 1){
         cout << BOLD << "SOMA" <<  RESET << endl;
-        cin.ignore();
         cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
-        cout << "Digite o numero: ";
-        getline(cin, num);  
+        cout << "Digite o primeiro numero da operacao: ";
         cin.ignore();
-        //aplicar detector de base
-        cout << "Digite o primeiro numero da operacao: " << endl;
-        getline(cin, num);
-        //aplicar conversor para base 10
-        cin.ignore();
-        cout << "Digite o segundo numero da operacao: " << endl;
-        getline(cin, num);
-        //aplicar conversor para base 10
-        //aplicar função soma
-        cout << BOLD << num1 << RESET << " + " << BOLD << num2 << RESET << " = " << BOLD << soma << RESET << endl;
+        getline(cin, num1);
+
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = sum(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " + " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
 
       }
-      else if(opc_arit == 2){//fazer o mesmo para as próximas operações
+      else if(opc_arit == 2){
         cout << BOLD << "SUBTRACAO" <<  RESET << endl;
-        
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
+
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = sum(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " - " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
       else if(opc_arit == 3){
         cout << BOLD << "MULTIPLICACAO" <<  RESET << endl;
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
 
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = sum(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " * " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
       else if(opc_arit == 4){//verificar ponto flutuante
         cout << BOLD << "DIVISAO" <<  RESET << endl;
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
 
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = sum(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " / " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
       else{
         cout << RED << "Opcao invalida" <<  RESET << endl;

@@ -22,10 +22,14 @@ string completeBits(string bin);
 
 string addOneToBinary(string binary);
 
+string conversorbase_soperacao(string num);
+
 //Operações aritiméticas
-string soma(string &num1,string &num2);
-string sub(string &num1, string &num2);
-string mult(string &num, string &num2);
-string div(string &num, string &num2);
+string sum(string &num1,string &num2, int base1, int base2);
+string sub(string &num1, string &num2, int base1, int base2);
+string mult(string &num, string &num2, int base1, int base2);
+string div(string &num, string &num2, int base1, int base2);
+
+
 
 #endif

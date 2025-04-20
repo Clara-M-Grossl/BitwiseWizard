@@ -151,3 +151,131 @@ string addOneToBinary(string binary){
   }
   return binary;
 }
+
+string conversorbase_soperacao(string num){
+
+  int tipo_bin;
+  string res;
+  const int base_e = 10;
+  int base_s;
+
+  cout << "Digite a base de saida (2, 8, 10, 16): ";
+  cin >> base_s;
+  
+  if(base_e == base_s){
+    return num;
+  } 
+  else{
+    if(base_s == 2){
+      do{
+        cout << "Escolha o formato" << endl;
+        cout << "[1] - Binario sem sinal" << endl;
+        cout << "[2] - Sinal magnetude" << endl;
+        cout << "[3] - Complemento de 1" << endl;
+        cout << "[4] - Complemento de 2" << endl;
+        cout << "[0] - Sair" << endl;
+        cout << ">> ";
+        cin >> tipo_bin;
+
+        if(tipo_bin == 1){
+          res = decimalBinary(baseToDecimal(num, base_e));
+        }
+        else if(tipo_bin == 2){
+          res = toSignedMagnitude(baseToDecimal(num, base_e));
+        }
+        else if(tipo_bin == 3){
+          res = toOnesComplement(baseToDecimal(num, base_e));
+        }
+        else if(tipo_bin == 4){
+          res = toTwosComplement(baseToDecimal(num, base_e));
+        }
+        else if(tipo_bin == 0){
+          cout << "Saindo............................" << endl;
+          break;
+        }
+        else{
+          cout << "Opcao invalida" << endl;
+          continue;
+        }
+        return res;
+      }while(true);
+    }
+    //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
+    // Fazer função para transformar o int que retorna do baseToDecimal em string => existe uma função pra isso => to_string()
+    else if(base_s == 8){
+      return res;
+    }
+    else if(base_s == 16){
+      return res;
+    }
+    else{
+      cout << "Base nao comportada" << endl << endl;
+      return "ERRO - base nao comportada";
+    }
+  }
+}
+
+
+
+string sum(string &num1,string &num2, int base1, int base2){
+  int n1 , n2 , sum;
+  n1 = baseToDecimal(num1, base1);
+  n2 = baseToDecimal(num2, base2);
+
+  sum = n1 + n2;
+
+  cout << "TESTE: " << sum << endl;
+
+  string resultado = to_string(sum);
+
+  string sumconverted = conversorbase_soperacao(resultado);
+  return sumconverted;
+}
+
+string sub(string &num1, string &num2, int base1, int base2){
+  
+  int n1 , n2 , sub;
+  n1 = baseToDecimal(num1, base1);
+  n2 = baseToDecimal(num2, base2);
+
+  sub = n1 - n2;
+
+  cout << "TESTE: " << sub << endl;
+
+  string resultado = to_string(sub);
+
+  string sumconverted = conversorbase_soperacao(resultado);
+
+  return sumconverted;
+}
+
+string mult(string &num1, string &num2, int base1, int base2){
+  
+  int n1 , n2 , mult;
+  n1 = baseToDecimal(num1, base1);
+  n2 = baseToDecimal(num2, base2);
+
+  mult = n1 * n2;
+
+  string resultado = to_string(mult);
+
+  string sumconverted = conversorbase_soperacao(resultado);
+
+  return sumconverted;
+}
+
+string div(string &num1, string &num2, int base1, int base2){
+  
+  int n1 , n2;
+  double div;
+  n1 = baseToDecimal(num1, base1);
+  n2 = baseToDecimal(num2, base2);
+
+  div = n1 / n2;
+
+  string resultado = to_string(div);
+  // olhar ponto flutuante
+  string sumconverted = conversorbase_soperacao(resultado);
+
+  return sumconverted;
+}
