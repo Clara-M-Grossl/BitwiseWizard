@@ -179,15 +179,19 @@ string conversorbase_soperacao(string num){
 
         if(tipo_bin == 1){
           res = decimalBinary(baseToDecimal(num, base_e));
+          break;
         }
         else if(tipo_bin == 2){
           res = toSignedMagnitude(baseToDecimal(num, base_e));
+          break;
         }
         else if(tipo_bin == 3){
           res = toOnesComplement(baseToDecimal(num, base_e));
+          break;
         }
         else if(tipo_bin == 4){
           res = toTwosComplement(baseToDecimal(num, base_e));
+          break;
         }
         else if(tipo_bin == 0){
           cout << "Saindo............................" << endl;
@@ -197,8 +201,8 @@ string conversorbase_soperacao(string num){
           cout << "Opcao invalida" << endl;
           continue;
         }
-        return res;
-      }while(true);
+      }while(tipo_bin == 0);
+      return res;
     }
     //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
     // Fazer função para transformar o int que retorna do baseToDecimal em string => existe uma função pra isso => to_string()
@@ -212,13 +216,13 @@ string conversorbase_soperacao(string num){
       cout << "Base nao comportada" << endl << endl;
       return "ERRO - base nao comportada";
     }
-  }
+  }  
 }
 
 
 
 string sum(string &num1,string &num2, int base1, int base2){
-  int n1 , n2 , sum;
+  double n1 , n2 , sum;
   n1 = baseToDecimal(num1, base1);
   n2 = baseToDecimal(num2, base2);
 
@@ -234,7 +238,7 @@ string sum(string &num1,string &num2, int base1, int base2){
 
 string sub(string &num1, string &num2, int base1, int base2){
   
-  int n1 , n2 , sub;
+  double n1 , n2 , sub;
   n1 = baseToDecimal(num1, base1);
   n2 = baseToDecimal(num2, base2);
 
@@ -251,7 +255,7 @@ string sub(string &num1, string &num2, int base1, int base2){
 
 string mult(string &num1, string &num2, int base1, int base2){
   
-  int n1 , n2 , mult;
+  double n1 , n2 , mult;
   n1 = baseToDecimal(num1, base1);
   n2 = baseToDecimal(num2, base2);
 
@@ -266,16 +270,105 @@ string mult(string &num1, string &num2, int base1, int base2){
 
 string div(string &num1, string &num2, int base1, int base2){
   
-  int n1 , n2;
-  double div;
+  double n1 , n2, div;
   n1 = baseToDecimal(num1, base1);
   n2 = baseToDecimal(num2, base2);
 
   div = n1 / n2;
 
   string resultado = to_string(div);
-  // olhar ponto flutuante
+  // fazer divisão em deecimal e colocar porcentagem de erro
   string sumconverted = conversorbase_soperacao(resultado);
 
   return sumconverted;
 }
+
+
+
+double baseToDecimalfloat(string num, int base){
+  int i;
+  int value;
+  double decimal = 0;
+  int power = 1;
+  char digit;
+  string intpart;
+  string fractpart;
+  size_t point;
+  long long integer = 0;
+  double fraction = 0.0;
+  int precision = 16; // controlar nmr de casas pós a virgula
+
+  bool negative = false;
+
+  //menor valor: menor digito significativo: n-1 * base ^ expoente min = m
+
+  //maior valor: maior digito significativo: n vezes * base ^ expoente max = M
+
+  //underflow: erro quando o número é menor do que pode ser representado pela base
+
+  //overflow: erro quando o número é maior do que pode ser representado pela base, pra mais infinito ou menos infinito
+
+
+  if(num[0] == '-'){
+    num = num.substr(1);
+    negative = true;
+  }
+  
+  string CleanNum = removePrefix(num, base);
+
+  //separando a string em parte inteira e fracionaria
+  for(char &c : CleanNum){
+    if (c == ',') c = '.';
+  }
+
+  point = CleanNum.find('.'); //Se não for encontrado, retorna string::npos
+
+  intpart = CleanNum.substr(0, point);
+
+  if(point != string::npos)
+    fractpart = CleanNum.substr(point + 1);
+  else fractpart = "";
+
+  // percorre da direita para a esquerda
+  for(i = intpart.length() - 1; i >= 0; i --){
+    digit = toupper(intpart[i]);
+    //converter string para int
+    if(digit >= '0' && digit <= '9'){
+      value = digit - '0';
+    }
+    else if(digit >= 'A' && digit <= 'F'){
+      value = digit - 'A' + 10;
+    }
+
+    integer += value * power;
+    power *= base; //power = power * bas
+  }
+  for(i = 0; i < fractpart.length() && i < precision; i ++){
+    digit = toupper(fractpart[i]);
+    //converter string para int
+    if(digit >= '0' && digit <= '9'){
+      value = digit - '0';
+    }
+    else if(digit >= 'A' && digit <= 'F'){
+      value = digit - 'A' + 10;
+    }
+
+    fraction += value * power;
+    power /= base; //power = power / base
+  }
+  //funcao dizima e nmr infinito
+  //arredondamento
+  //função margem de erro
+
+
+
+  decimal = integer + fraction;
+
+  if(negative){
+    decimal = -decimal;
+  }
+
+  return decimal;
+
+}
+
