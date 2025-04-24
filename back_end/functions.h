@@ -8,6 +8,9 @@ using namespace std;
 int detectBase(string &num);
 int baseToDecimal(string num, int base);
 bool isOctal(string &num);
+bool isBinary(string &num);
+bool isHexadecimal(string &num);
+bool isDecimal(string &num);
 
 //Binario
 string decimalBinary(int decimal);

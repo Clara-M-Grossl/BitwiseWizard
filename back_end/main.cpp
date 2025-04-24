@@ -34,10 +34,14 @@ int main(){
       cout << "Digite o numero: ";
       getline(cin, num);
 
+      base_e = detectBase(num);
+      if(base_e == 0){
+        cout << "Numero invalido" << endl;
+        continue;
+      }
       cout << "Digite a base de saida (2, 8, 10, 16): ";
       cin >> base_s;
       
-      base_e = detectBase(num);
 
       if(base_e == base_s){
         cout << "Bases iguais" << endl << endl;

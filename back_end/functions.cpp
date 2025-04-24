@@ -5,20 +5,41 @@
 int detectBase(string &num){
   // Retorna o int relacionado ao tipo de base
   if(num.substr(0, 2) == "0b" || num.substr(0, 3) == "-0b"){
-    return 2;
+    if(isBinary(num)){
+      return 2;
+    }
+    return 0;
   }
   if(num.substr(0, 2) == "0x" || num.substr(0, 3) == "-0x"){
-    return 16;
+    if(isHexadecimal(num)){
+      return 16;
+    }
+    return 0;
   }
-  if(num[0] == '0' && isOctal(num) && num.length() > 1 && num[1] != 'x' || num.substr(0,2) == "-0"){
-    return 8;
+  if(num[0] == '0' && num[1] != 'x' || num.substr(0,2) == "-0"){
+    if(isOctal(num)){
+      return 8;
+    }
+    return 0;
   }
-  return 10;
+  if(isDecimal(num)){
+    return 10;
+  }
+  return 0;
 }
 
 bool isOctal(string &num){
   // Retorna TRUE se a string num for composta por 01234567
-  return num.find_first_not_of("01234567") == string::npos;
+  return num.find_first_not_of("-01234567") == string::npos;
+}
+bool isBinary(string &num){
+  return num.find_first_not_of("-b01") == string::npos;
+}
+bool isHexadecimal(string &num){
+  return num.find_first_not_of("-x0123456789ABCDEFabcdef") == string::npos;
+}
+bool isDecimal(string &num){
+  return num.find_first_not_of("-0123456789") == string::npos;
 }
 
 int baseToDecimal(string num, int base){
