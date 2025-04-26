@@ -380,7 +380,6 @@ double baseToDecimalfloat(string num, int base){
 
 
   //funcao dizima = ler a string e armazenar os numeros, verificar se os numeros: pega o numero indexado, e verifica se tem outro igual, se não próximo numero, se tiver outro igual, verificar e o numero seguinte é igual tbm, se n for, prox, se não continua verificando para descobir qual a dizima, assim que retornar para o mesmo valor incial da dizima, armazenar o numero
-  //nmr infinito = fds - não passando das casas tudo certo
   //arredondamento - if nmr> base/2 = arredonda pro prox nmr, esle if nmr < base/2 = arredonda para baixo, caso o nmr depois do permitidio seja menor
 
 
