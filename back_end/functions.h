@@ -37,13 +37,12 @@ string div(string &num, string &num2, int base1, int base2);
 //Ponto flutuante
 string floatpoint(string &num, int base);
 double baseToDecimalfloat(string num, int base);
-double valueAbsolute(double num);
-
-
-// converter todas as para decimal float e de decimal flaot para bases;
-string decimalBinary(double decimal);
-string toSignedMagnitude(double decimal);
-string toOnesComplement(double demal);
-string toTwosComplement(double decimal);
+string floatdecimalBinary(double decimal);
+string toTwosComplementfloat(double decimal);
+string toOnesComplementfloat(double decimal);
+string toSignedMagnitudefloat(double decimal);
+double valueAbsolutefloat(double num);
+string addOneToBinaryfloat(string binary);
+bool isnotainteger(float num);
 
 #endif

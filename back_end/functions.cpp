@@ -317,7 +317,7 @@ double baseToDecimalfloat(string num, int base){
   size_t point;
   long long integer = 0;
   double fraction = 0.0;
-  int precision = 16; // controlar nmr de casas pós a virgula
+  int precision = 8; // controlar nmr de casas pós a virgula
 
   bool negative = false;
 
@@ -342,7 +342,7 @@ double baseToDecimalfloat(string num, int base){
     if (c == ',') c = '.';
   }
 
-  point = CleanNum.find('.'); //Se não for encontrado, retorna string::npos
+  point = CleanNum.find('.'); //Se não for encontrado, retorna string::npos, se não retorna a posição
 
   intpart = CleanNum.substr(0, point);
 
@@ -375,11 +375,13 @@ double baseToDecimalfloat(string num, int base){
     }
 
     fraction += value * power;
-    power /= base; //power = power / base
+    power /= base; //power = power / base //verificar
   }
-  //funcao dizima e nmr infinito
-  //arredondamento
-  //função margem de erro
+
+
+  //funcao dizima = ler a string e armazenar os numeros, verificar se os numeros: pega o numero indexado, e verifica se tem outro igual, se não próximo numero, se tiver outro igual, verificar e o numero seguinte é igual tbm, se n for, prox, se não continua verificando para descobir qual a dizima, assim que retornar para o mesmo valor incial da dizima, armazenar o numero
+  //nmr infinito = fds - não passando das casas tudo certo
+  //arredondamento - if nmr> base/2 = arredonda pro prox nmr, esle if nmr < base/2 = arredonda para baixo, caso o nmr depois do permitidio seja menor
 
 
 
@@ -393,3 +395,108 @@ double baseToDecimalfloat(string num, int base){
 
 }
 
+string floatdecimalBinary(double decimal){
+  string binary = "";
+  string intbinary = "";
+  string fracbinary = "";
+  int integerpart;
+  double fractionalpart;
+  int precision = 8;
+
+  if (decimal == 0.0)
+    return "0";
+
+  decimal = valueAbsolute(decimal);
+
+  //separação em parte inteira e fracionaria para conversão
+  integerpart = static_cast<int>(decimal);
+  fractionalpart = decimal - integerpart;
+
+  while(integerpart > 0){
+    intbinary = (integerpart % 2 == 0 ? "0" : "1") + intbinary;
+    integerpart /= 2;
+  }
+  completeBits(intbinary);
+
+  while(fractionalpart > 0.0 && precision--){
+    fractionalpart *= 2;
+      if (fractionalpart >= 1.0){
+        fracbinary += "1";
+        fractionalpart -=1;
+      }
+      else fracbinary += '0';
+
+    binary = intbinary;
+    if (!fracbinary.empty()) {
+        binary += "." + fracbinary; // verificar
+    }
+  }
+
+  return binary;
+}
+
+double valueAbsolutefloat(double num){  
+  return (num < 0) ? -num : num;
+}
+string toSignedMagnitudefloat(double decimal){
+  bool negative = false;
+  
+  string binary = completeBits(floatdecimalBinary(decimal));
+
+  if(decimal < 0){
+    negative = true;
+  }
+  
+  if(negative){
+    binary[0] = '1';
+  }
+  else{
+    binary[0] = '0';
+  }
+  return binary;
+}
+string toOnesComplementfloat(double decimal){
+  string binary;
+  if(isnotainteger(decimal) == true) return binary= "nao é possivel fazer conversao de float para complemento de 1";
+  binary = completeBits(decimalBinary(decimal));
+  
+  if(decimal < 0){
+    for(char &c : binary){
+      c = (c == '0') ? '1' : '0';
+    }
+  }
+  return binary;
+}
+string toTwosComplementfloat(double decimal){
+  string binary;
+  if(isnotainteger(decimal) == true) return binary = "nao é possivel fazer conversao de float para complemento de 2";
+  binary = completeBits(decimalBinary(decimal));
+
+  if(decimal < 0){
+    binary = addOneToBinary(toOnesComplement(decimal));
+  }
+  return binary;
+}
+string addOneToBinaryfloat(string binary){
+  int i;
+  bool carry = true;
+
+  for (i = binary.length() - 1; i >= 0; i--){
+    if(binary[i] ==  '0'){
+      binary[i] = '1';
+      carry = false;
+      break;
+    }
+    else{
+      binary[i] = '0';
+    }
+  }
+  if(carry){
+    return "1" + binary;
+  }
+  return binary;
+}
+
+bool isnotainteger(float num){
+  return floor (num) != num; // floor(num) vai arredondar o numero para baixo, e se for inteiro o numero vai permanecer igual
+}
