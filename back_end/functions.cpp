@@ -30,16 +30,16 @@ int detectBase(string &num){
 
 bool isOctal(string &num){
   // Retorna TRUE se a string num for composta por 01234567
-  return num.find_first_not_of("-01234567") == string::npos;
+  return num.find_first_not_of("-01234567.,") == string::npos;
 }
 bool isBinary(string &num){
-  return num.find_first_not_of("-b01") == string::npos;
+  return num.find_first_not_of("-b01.,") == string::npos;
 }
 bool isHexadecimal(string &num){
-  return num.find_first_not_of("-x0123456789ABCDEFabcdef") == string::npos;
+  return num.find_first_not_of("-x0123456789ABCDEFabcdef.,") == string::npos;
 }
 bool isDecimal(string &num){
-  return num.find_first_not_of("-0123456789") == string::npos;
+  return num.find_first_not_of("-0123456789.,") == string::npos;
 }
 
 int baseToDecimal(string num, int base){
@@ -199,19 +199,19 @@ string conversorbase_soperacao(string num){
         cin >> tipo_bin;
 
         if(tipo_bin == 1){
-          res = decimalBinary(baseToDecimal(num, base_e));
+          res = floatdecimalBinary(baseToDecimalfloat(num, base_e));
           break;
         }
         else if(tipo_bin == 2){
-          res = toSignedMagnitude(baseToDecimal(num, base_e));
+          res = toSignedMagnitudefloat(baseToDecimalfloat(num, base_e));
           break;
         }
         else if(tipo_bin == 3){
-          res = toOnesComplement(baseToDecimal(num, base_e));
+          res = toOnesComplementfloat(baseToDecimalfloat(num, base_e));
           break;
         }
         else if(tipo_bin == 4){
-          res = toTwosComplement(baseToDecimal(num, base_e));
+          res = toTwosComplementfloat(baseToDecimalfloat(num, base_e));
           break;
         }
         else if(tipo_bin == 0){
@@ -244,8 +244,8 @@ string conversorbase_soperacao(string num){
 
 string sum(string &num1,string &num2, int base1, int base2){
   double n1 , n2 , sum;
-  n1 = baseToDecimal(num1, base1);
-  n2 = baseToDecimal(num2, base2);
+  n1 = baseToDecimalfloat(num1, base1);
+  n2 = baseToDecimalfloat(num2, base2);
 
   sum = n1 + n2;
 
@@ -260,8 +260,8 @@ string sum(string &num1,string &num2, int base1, int base2){
 string sub(string &num1, string &num2, int base1, int base2){
   
   double n1 , n2 , sub;
-  n1 = baseToDecimal(num1, base1);
-  n2 = baseToDecimal(num2, base2);
+  n1 = baseToDecimalfloat(num1, base1);
+  n2 = baseToDecimalfloat(num2, base2);
 
   sub = n1 - n2;
 
@@ -277,8 +277,8 @@ string sub(string &num1, string &num2, int base1, int base2){
 string mult(string &num1, string &num2, int base1, int base2){
   
   double n1 , n2 , mult;
-  n1 = baseToDecimal(num1, base1);
-  n2 = baseToDecimal(num2, base2);
+  n1 = baseToDecimalfloat(num1, base1);
+  n2 = baseToDecimalfloat(num2, base2);
 
   mult = n1 * n2;
 
@@ -292,25 +292,23 @@ string mult(string &num1, string &num2, int base1, int base2){
 string div(string &num1, string &num2, int base1, int base2){
   
   double n1 , n2, div;
-  n1 = baseToDecimal(num1, base1);
-  n2 = baseToDecimal(num2, base2);
+  n1 = baseToDecimalfloat(num1, base1);
+  n2 = baseToDecimalfloat(num2, base2);
 
   div = n1 / n2;
 
   string resultado = to_string(div);
-  // fazer divisão em deecimal e colocar porcentagem de erro
-  string sumconverted = conversorbase_soperacao(resultado);
+  string divconverted = conversorbase_soperacao(resultado);
 
-  return sumconverted;
+  return divconverted;
 }
-
-
 
 double baseToDecimalfloat(string num, int base){
   int i;
   int value;
   double decimal = 0;
   int power = 1;
+  int power2 = 0.1;
   char digit;
   string intpart;
   string fractpart;
@@ -320,15 +318,6 @@ double baseToDecimalfloat(string num, int base){
   int precision = 8; // controlar nmr de casas pós a virgula
 
   bool negative = false;
-
-  //menor valor: menor digito significativo: n-1 * base ^ expoente min = m
-
-  //maior valor: maior digito significativo: n vezes * base ^ expoente max = M
-
-  //underflow: erro quando o número é menor do que pode ser representado pela base
-
-  //overflow: erro quando o número é maior do que pode ser representado pela base, pra mais infinito ou menos infinito
-
 
   if(num[0] == '-'){
     num = num.substr(1);
@@ -374,15 +363,11 @@ double baseToDecimalfloat(string num, int base){
       value = digit - 'A' + 10;
     }
 
-    fraction += value * power;
-    power /= base; //power = power / base //verificar
+    fraction += value * power2;
+    power2 /= base; //power = power / base //verificar
   }
 
-
-  //funcao dizima = ler a string e armazenar os numeros, verificar se os numeros: pega o numero indexado, e verifica se tem outro igual, se não próximo numero, se tiver outro igual, verificar e o numero seguinte é igual tbm, se n for, prox, se não continua verificando para descobir qual a dizima, assim que retornar para o mesmo valor incial da dizima, armazenar o numero
-  //arredondamento - if nmr> base/2 = arredonda pro prox nmr, esle if nmr < base/2 = arredonda para baixo, caso o nmr depois do permitidio seja menor
-
-
+  cout << "parte inteira: " << integer << endl << "Parte fracionaria: " << fraction;
 
   decimal = integer + fraction;
 
@@ -405,7 +390,7 @@ string floatdecimalBinary(double decimal){
   if (decimal == 0.0)
     return "0";
 
-  decimal = valueAbsolute(decimal);
+  decimal = valueAbsolutefloat(decimal);
 
   //separação em parte inteira e fracionaria para conversão
   integerpart = static_cast<int>(decimal);
@@ -457,7 +442,7 @@ string toSignedMagnitudefloat(double decimal){
 string toOnesComplementfloat(double decimal){
   string binary;
   if(isnotainteger(decimal) == true) return binary= "nao é possivel fazer conversao de float para complemento de 1";
-  binary = completeBits(decimalBinary(decimal));
+  binary = completeBits(floatdecimalBinary(decimal));
   
   if(decimal < 0){
     for(char &c : binary){
@@ -469,14 +454,14 @@ string toOnesComplementfloat(double decimal){
 string toTwosComplementfloat(double decimal){
   string binary;
   if(isnotainteger(decimal) == true) return binary = "nao é possivel fazer conversao de float para complemento de 2";
-  binary = completeBits(decimalBinary(decimal));
+  binary = completeBits(floatdecimalBinary(decimal));
 
   if(decimal < 0){
-    binary = addOneToBinary(toOnesComplement(decimal));
+    binary = addOneToBinary(toOnesComplementfloat(decimal));
   }
   return binary;
 }
-string addOneToBinaryfloat(string binary){
+string addOneToBinaryfloat(string binary){ //verificar
   int i;
   bool carry = true;
 
@@ -496,6 +481,6 @@ string addOneToBinaryfloat(string binary){
   return binary;
 }
 
-bool isnotainteger(float num){
+bool isnotainteger(double num){
   return floor (num) != num; // floor(num) vai arredondar o numero para baixo, e se for inteiro o numero vai permanecer igual
 }

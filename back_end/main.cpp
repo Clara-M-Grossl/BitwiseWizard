@@ -59,16 +59,16 @@ int main(){
           cin >> tipo_bin;
 
           if(tipo_bin == 1){
-            binary = decimalBinary(baseToDecimal(num, base_e));
+            binary = floatdecimalBinary(baseToDecimalfloat(num, base_e));
           }
           else if(tipo_bin == 2){
-            binary = toSignedMagnitude(baseToDecimal(num, base_e));
+            binary = toSignedMagnitudefloat(baseToDecimalfloat(num, base_e));
           }
           else if(tipo_bin == 3){
-            binary = toOnesComplement(baseToDecimal(num, base_e));
+            binary = toOnesComplementfloat(baseToDecimalfloat(num, base_e));
           }
           else if(tipo_bin == 4){
-            binary = toTwosComplement(baseToDecimal(num, base_e));
+            binary = toTwosComplementfloat(baseToDecimalfloat(num, base_e));
           }
           else if(tipo_bin == 0){
             cout << RED << "Saindo............................" << RESET << endl;
@@ -91,7 +91,7 @@ int main(){
           continue;
         }
         else if(base_s == 10){
-          string decimal = to_string(baseToDecimal(num, base_e));
+          string decimal = to_string(baseToDecimalfloat(num, base_e));
           
           cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
           cout << BOLD << "Resultado: " << RESET << decimal << endl << endl;
@@ -166,7 +166,7 @@ int main(){
         res = mult(num1, num2, base_e, base_e2);
         cout << BOLD << num1 << RESET << " * " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
       }
-      else if(opc_arit == 4){//verificar ponto flutuante
+      else if(opc_arit == 4){
         cout << BOLD << "DIVISAO" <<  RESET << endl;
         cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
         cout << "Digite o primeiro numero da operacao: ";
