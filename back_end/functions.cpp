@@ -308,10 +308,10 @@ double baseToDecimalfloat(string num, int base){
   int value;
   double decimal = 0;
   int power = 1;
-  int power2 = 0.1;
+  double power2 = 1.0 / base;
   char digit;
-  string intpart;
-  string fractpart;
+  string intpart = "";
+  string fractpart = "";
   size_t point;
   long long integer = 0;
   double fraction = 0.0;
@@ -362,12 +362,15 @@ double baseToDecimalfloat(string num, int base){
     else if(digit >= 'A' && digit <= 'F'){
       value = digit - 'A' + 10;
     }
-
+    cout << "fraction teste1: "<< fraction <<endl;
+    cout << "power2: "<< power2 <<endl;
     fraction += value * power2;
-    power2 /= base; //power = power / base //verificar
+    
+    cout << "fraction teste2: "<< fraction <<endl;
+    power2 /= base; //power = power / base
+    cout << "fraction teste3: "<< fraction <<endl;
   }
-
-  cout << "parte inteira: " << integer << endl << "Parte fracionaria: " << fraction;
+  cout << "Parte fracionaria: " << fraction << endl;
 
   decimal = integer + fraction;
 
