@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "functions.h"
+#include <iomanip>
 
 int detectBase(string &num){
   // Retorna o int relacionado ao tipo de base
@@ -318,13 +319,13 @@ double baseToDecimalfloat(string num, int base){
   int precision = 8; // controlar nmr de casas pós a virgula
 
   bool negative = false;
-
-  if(num[0] == '-'){
-    num = num.substr(1);
-    negative = true;
-  }
   
   string CleanNum = removePrefix(num, base);
+
+  if(CleanNum[0] == '-'){ //verificar
+    CleanNum = CleanNum.substr(1);
+    negative = true;
+  }
 
   //separando a string em parte inteira e fracionaria
   for(char &c : CleanNum){
@@ -362,15 +363,9 @@ double baseToDecimalfloat(string num, int base){
     else if(digit >= 'A' && digit <= 'F'){
       value = digit - 'A' + 10;
     }
-    cout << "fraction teste1: "<< fraction <<endl;
-    cout << "power2: "<< power2 <<endl;
     fraction += value * power2;
-    
-    cout << "fraction teste2: "<< fraction <<endl;
     power2 /= base; //power = power / base
-    cout << "fraction teste3: "<< fraction <<endl;
   }
-  cout << "Parte fracionaria: " << fraction << endl;
 
   decimal = integer + fraction;
 
@@ -378,7 +373,7 @@ double baseToDecimalfloat(string num, int base){
     decimal = -decimal;
   }
 
-  return decimal;
+  return decimal; //to string ta arredondando para 6 digitos
 
 }
 
