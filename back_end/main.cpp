@@ -39,6 +39,7 @@ int main(){
         cout << "Numero invalido" << endl;
         continue;
       }
+
       cout << "Digite a base de saida (2, 8, 10, 16): ";
       cin >> base_s;
       
@@ -59,16 +60,36 @@ int main(){
           cin >> tipo_bin;
 
           if(tipo_bin == 1){
-            binary = floatdecimalBinary(baseToDecimalfloat(num, base_e));
+            if(isFloat(num, base_e)){
+              binary = floatdecimalBinary(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = decimalBinary(baseToDecimal(num, base_e));
+            }
           }
           else if(tipo_bin == 2){
-            binary = toSignedMagnitudefloat(baseToDecimalfloat(num, base_e));
+            if(isFloat(num, base_e)){
+              binary = toSignedMagnitudefloat(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = toSignedMagnitude(baseToDecimal(num, base_e));
+            }
           }
           else if(tipo_bin == 3){
-            binary = toOnesComplementfloat(baseToDecimalfloat(num, base_e));
+            if(isFloat(num, base_e)){
+              binary = toOnesComplementfloat(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = toOnesComplement(baseToDecimal(num, base_e));
+            }
           }
           else if(tipo_bin == 4){
-            binary = toTwosComplementfloat(baseToDecimalfloat(num, base_e));
+            if(isFloat(num, base_e)){
+              binary = toTwosComplementfloat(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = toTwosComplement(baseToDecimal(num, base_e));
+            }
           }
           else if(tipo_bin == 0){
             cout << RED << "Saindo............................" << RESET << endl;

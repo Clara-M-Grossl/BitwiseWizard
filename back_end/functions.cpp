@@ -52,7 +52,6 @@ int baseToDecimal(string num, int base){
 
   bool negative = false;
 
-  
   if(num[0] == '-'){
     num = num.substr(1);
     negative = true;
@@ -320,12 +319,11 @@ double baseToDecimalfloat(string num, int base){
 
   bool negative = false;
   
-  string CleanNum = removePrefix(num, base);
-
-  if(CleanNum[0] == '-'){ //verificar
-    CleanNum = CleanNum.substr(1);
+  if(num[0] == '-'){ //verificar
+    num = num.substr(1);
     negative = true;
   }
+  string CleanNum = removePrefix(num, base);
 
   //separando a string em parte inteira e fracionaria
   for(char &c : CleanNum){
@@ -374,7 +372,6 @@ double baseToDecimalfloat(string num, int base){
   }
 
   return decimal; //to string ta arredondando para 6 digitos
-
 }
 
 string floatdecimalBinary(double decimal){
@@ -398,9 +395,9 @@ string floatdecimalBinary(double decimal){
     intbinary = (integerpart % 2 == 0 ? "0" : "1") + intbinary;
     integerpart /= 2;
   }
-  completeBits(intbinary);
+  intbinary = completeBits(intbinary);
 
-  while(fractionalpart > 0.0 && precision--){
+  while(fractionalpart >= 0.0 && precision--){
     fractionalpart *= 2;
       if (fractionalpart >= 1.0){
         fracbinary += "1";
@@ -413,7 +410,6 @@ string floatdecimalBinary(double decimal){
         binary += "." + fracbinary; // verificar
     }
   }
-
   return binary;
 }
 
@@ -439,7 +435,7 @@ string toSignedMagnitudefloat(double decimal){
 }
 string toOnesComplementfloat(double decimal){
   string binary;
-  if(isnotainteger(decimal) == true) return binary= "nao é possivel fazer conversao de float para complemento de 1";
+  if(isnotainteger(decimal) == true) return binary= "nao eh possivel fazer conversao de float para complemento de 1";
   binary = completeBits(floatdecimalBinary(decimal));
   
   if(decimal < 0){
@@ -451,7 +447,7 @@ string toOnesComplementfloat(double decimal){
 }
 string toTwosComplementfloat(double decimal){
   string binary;
-  if(isnotainteger(decimal) == true) return binary = "nao é possivel fazer conversao de float para complemento de 2";
+  if(isnotainteger(decimal) == true) return binary = "nao eh possivel fazer conversao de float para complemento de 2";
   binary = completeBits(floatdecimalBinary(decimal));
 
   if(decimal < 0){
@@ -481,4 +477,23 @@ string addOneToBinaryfloat(string binary){ //verificar
 
 bool isnotainteger(double num){
   return floor (num) != num; // floor(num) vai arredondar o numero para baixo, e se for inteiro o numero vai permanecer igual
+}
+
+bool isFloat(string num, int base){
+  size_t point;
+
+  if(num[0] == '-'){
+    num = num.substr(1);
+  }
+  string CleanNum = removePrefix(num, base);
+
+  for(char &c : CleanNum){
+    if (c == ',') c = '.';
+  }
+  point = CleanNum.find('.');
+
+  if(point != string::npos){
+    return true;
+  }
+  return false;
 }
