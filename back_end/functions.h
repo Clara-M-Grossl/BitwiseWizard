@@ -43,6 +43,8 @@ string toOnesComplementfloat(double decimal);
 string toSignedMagnitudefloat(double decimal);
 double valueAbsolutefloat(double num);
 string addOneToBinaryfloat(string binary);
+string doubletostring(double num);
+
 bool isnotainteger(double num);
 
 bool isFloat(string num, int base);

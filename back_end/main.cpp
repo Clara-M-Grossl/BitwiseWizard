@@ -112,7 +112,7 @@ int main(){
           continue;
         }
         else if(base_s == 10){
-          string decimal = to_string(baseToDecimalfloat(num, base_e));
+          string decimal = doubletostring((baseToDecimalfloat(num, base_e)));
           
           cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
           cout << BOLD << "Resultado: " << RESET << decimal << endl << endl;

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cmath>
-#include "functions.h"
 #include <iomanip>
+#include <sstream>
+#include "functions.h"
 
 int detectBase(string &num){
   // Retorna o int relacionado ao tipo de base
@@ -407,7 +408,7 @@ string floatdecimalBinary(double decimal){
 
     binary = intbinary;
     if (!fracbinary.empty()) {
-        binary += "." + fracbinary; // verificar
+        binary += "." + fracbinary;
     }
   }
   return binary;
@@ -473,6 +474,12 @@ string addOneToBinaryfloat(string binary){ //verificar
     return "1" + binary;
   }
   return binary;
+}
+
+string doubletostring(double num){
+  ostringstream oss;
+  oss << fixed << setprecision(8) << num;
+  return oss.str();
 }
 
 bool isnotainteger(double num){
