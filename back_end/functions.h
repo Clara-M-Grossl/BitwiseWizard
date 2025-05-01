@@ -11,6 +11,7 @@ bool isOctal(string &num);
 bool isBinary(string &num);
 bool isHexadecimal(string &num);
 bool isDecimal(string &num);
+string decimalToOctal(string num, int base);
 
 //Binario
 string decimalBinary(int decimal);

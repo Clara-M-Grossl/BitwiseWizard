@@ -224,13 +224,36 @@ string conversorbase_soperacao(string num){
           continue;
         }
       }while(tipo_bin == 0);
-      return res;
+       res;
     }
     //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
     // Fazer função para transformar o int que retorna do baseToDecimal em string => existe uma função pra isso => to_string()
     else if(base_s == 8){
-      return res;
-    }
+        string decimalToOctal(string num, int base){
+          int decimal;
+          string octal;
+          vector<int> digitos;
+
+          decimal = baseToDecimal(num, base);
+
+          if (decimal == 0){
+            return "0";
+          }
+
+          else {
+            while (decimal > 0) {
+              digitos.push_back(decimal % 8);
+              decimal = decimal / 8;
+          }
+
+          for (auto it = digitos.rbegin(); it != digitos.rend(); ++it) {
+              octal += to_string(*it);
+          }
+
+          return octal;
+          }
+        }
+
     else if(base_s == 16){
       return res;
     }
