@@ -108,14 +108,15 @@ int main(){
         //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
         // Fazer função para transformar o int que retorna do baseToDecimal em string => existe uma função pra isso => to_string()
         else if(base_s == 8){
-            string decimal = to_string(baseToDecimal(num, base_e));
+            string octal = deciToOctal((baseToDecimalfloat(num, base_e)));
             
-            cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
-            cout << BOLD << "Resultado: " << RESET << octal << endl << endl;
+        cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+        cout << BOLD << "Resultado: " << RESET << octal << endl << endl;
           continue;
         }
+          
         else if(base_s == 10){
-          string decimal = doubletostring((baseToDecimalfloat(num, base_e)));
+            string decimal = doubletostring((baseToDecimalfloat(num, base_e)));
           
           cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
           cout << BOLD << "Resultado: " << RESET << decimal << endl << endl;

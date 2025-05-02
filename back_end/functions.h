@@ -11,7 +11,11 @@ bool isOctal(string &num);
 bool isBinary(string &num);
 bool isHexadecimal(string &num);
 bool isDecimal(string &num);
-string decimalToOctal(string num, int base);
+
+//Outras Bases
+string converterParteInteira(double parteInteira);
+string converterParteFracionaria(double parteFracionaria, int maxDigitos = 6);
+string deciToOctal(double numero);
 
 //Binario
 string decimalBinary(int decimal);

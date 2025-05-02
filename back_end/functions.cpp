@@ -224,36 +224,15 @@ string conversorbase_soperacao(string num){
           continue;
         }
       }while(tipo_bin == 0);
-       res;
+      return res;
     }
     //CONVERTER BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
     // Fazer função para transformar o int que retorna do baseToDecimal em string => existe uma função pra isso => to_string()
     else if(base_s == 8){
-        string decimalToOctal(string num, int base){
-          int decimal;
-          string octal;
-          vector<int> digitos;
-
-          decimal = baseToDecimal(num, base);
-
-          if (decimal == 0){
-            return "0";
-          }
-
-          else {
-            while (decimal > 0) {
-              digitos.push_back(decimal % 8);
-              decimal = decimal / 8;
-          }
-
-          for (auto it = digitos.rbegin(); it != digitos.rend(); ++it) {
-              octal += to_string(*it);
-          }
-
-          return octal;
-          }
-        }
-
+        string res = deciToOctal((baseToDecimalfloat(num, base_e)));
+        return res;
+    }
+      
     else if(base_s == 16){
       return res;
     }
@@ -261,10 +240,8 @@ string conversorbase_soperacao(string num){
       cout << "Base nao comportada" << endl << endl;
       return "ERRO - base nao comportada";
     }
-  }  
+  }
 }
-
-
 
 string sum(string &num1,string &num2, int base1, int base2){
   double n1 , n2 , sum;
@@ -526,4 +503,69 @@ bool isFloat(string num, int base){
     return true;
   }
   return false;
+}
+
+string converterParteInteira(double parteInteira) {
+    if (parteInteira == 0) {
+        return "0";
+    }
+    string octal;
+    uint64_t inteiro = static_cast<uint64_t>(parteInteira);
+    while (inteiro > 0) {
+        int resto = inteiro % 8;
+        octal = to_string(resto) + octal;
+        inteiro /= 8;
+    }
+    return octal;
+}
+
+string converterParteFracionaria(double parteFracionaria, int maxDigitos) {
+    if (parteFracionaria == 0.0) {
+        return "";
+    }
+    string octal;
+    while (parteFracionaria > 0.0 && maxDigitos-- > 0) {
+        parteFracionaria *= 8.0;
+        int digito = static_cast<int>(parteFracionaria);
+        octal += to_string(digito);
+        parteFracionaria -= static_cast<double>(digito);
+    }
+    // Remover zeros à direita
+    size_t ultimoNaoZero = octal.find_last_not_of('0');
+    if (ultimoNaoZero != string::npos) {
+        octal = octal.substr(0, ultimoNaoZero + 1);
+    } else {
+        octal = ""; // Todos os dígitos eram zero
+    }
+    return octal;
+}
+
+string deciToOctal(double numero)
+{
+    bool negativo = false;
+    string resultado;
+    
+    if (numero < 0) {
+        negativo = true;
+        numero = -numero;
+    }
+    
+    double parteInteira;
+    double parteFracionaria = modf(numero, &parteInteira);
+    
+    string octalInteiro = converterParteInteira(parteInteira);
+    string octalFracionario = converterParteFracionaria(parteFracionaria);
+    
+    if (negativo) {
+        resultado = "-";
+    } else {
+        resultado = "";
+    }
+    
+    resultado += octalInteiro;
+    
+    if (!octalFracionario.empty()) {
+        resultado += "." + octalFracionario;
+    }
+    return resultado;
 }
