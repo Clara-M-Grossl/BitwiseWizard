@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iomanip>
 #include <sstream>
-#include "functions.h"
+#include "functions.hpp"
 
 int detectBase(string &num){
   // Retorna o int relacionado ao tipo de base
@@ -505,7 +505,7 @@ bool isFloat(string num, int base){
   return false;
 }
 
-string converterParteInteira(double parteInteira) {
+string converterParteInteiraOctal(double parteInteira) {
     if (parteInteira == 0) {
         return "0";
     }
@@ -519,7 +519,7 @@ string converterParteInteira(double parteInteira) {
     return octal;
 }
 
-string converterParteFracionaria(double parteFracionaria, int maxDigitos) {
+string converterParteFracionariaOctal(double parteFracionaria, int maxDigitos) {
     if (parteFracionaria == 0.0) {
         return "";
     }
@@ -553,8 +553,8 @@ string deciToOctal(double numero)
     double parteInteira;
     double parteFracionaria = modf(numero, &parteInteira);
     
-    string octalInteiro = converterParteInteira(parteInteira);
-    string octalFracionario = converterParteFracionaria(parteFracionaria);
+    string octalInteiro = converterParteInteiraOctal(parteInteira);
+    string octalFracionario = converterParteFracionariaOctal(parteFracionaria);
     
     if (negativo) {
         resultado = "-";
@@ -566,6 +566,80 @@ string deciToOctal(double numero)
     
     if (!octalFracionario.empty()) {
         resultado += "." + octalFracionario;
+    }
+    return resultado;
+}
+
+string converterParteInteiraHexa(double parteInteira)
+{
+    if (parteInteira == 0) {
+        return "0";
+    }
+    
+    string hexa;
+    uint64_t inteiro = static_cast<uint64_t>(parteInteira);
+    const char digitosHex[] = "0123456789ABCDEF";
+    
+    while (inteiro > 0) {
+        int resto = inteiro % 16;
+        hexa = digitosHex[resto] + hexa;
+        inteiro /= 16;
+    }
+    
+    return hexa;
+}
+    
+
+string converterParteFracionariaHexa(double parteFracionaria, int maxDigitos)
+{
+    if (parteFracionaria == 0.0) {
+        return "";
+    }
+    
+    string hexa;
+    const char digitosHex[] = "0123456789ABCDEF";
+    
+    while (parteFracionaria > 0.0 && maxDigitos-- > 0) {
+        parteFracionaria *= 16.0;
+        int digito = static_cast<int>(parteFracionaria);
+        hexa += digitosHex[digito];
+        parteFracionaria -= static_cast<double>(digito);
+    }
+    
+    size_t ultimoNaoZero = hexa.find_last_not_of('0');
+    if (ultimoNaoZero != string::npos) {
+        hexa = hexa.substr(0, ultimoNaoZero + 1);
+    } else {
+        hexa = "";
+    }
+    
+    return hexa;
+    
+}
+
+string deciToHexa(double numero)
+{
+    bool negativo = false;
+    if (numero < 0) {
+        negativo = true;
+        numero = -numero;
+    }
+
+    double parteInteira;
+    double parteFracionaria = modf(numero, &parteInteira);
+
+    string hexInteiro = converterParteInteiraHexa(parteInteira);
+    string hexFracionario = converterParteFracionariaHexa(parteFracionaria);
+
+    string resultado;
+    if (negativo) {
+        resultado = "-";
+    }
+    
+    resultado += hexInteiro;
+    
+    if (!hexFracionario.empty()) {
+        resultado += "." + hexFracionario;
     }
     return resultado;
 }

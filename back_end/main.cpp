@@ -1,5 +1,5 @@
 #include <iostream>
-#include "functions.h"
+#include "functions.hpp"
 #include "colors.h"
 
 int main(){
@@ -123,7 +123,10 @@ int main(){
           continue;
         }
         else if(base_s == 16){
-
+            string hexa = deciToHexa((baseToDecimalfloat(num, base_e)));
+            
+            cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+            cout << BOLD << "Resultado: " << RESET << hexa << endl << endl;
           continue;
         }
         else{

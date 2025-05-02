@@ -13,9 +13,12 @@ bool isHexadecimal(string &num);
 bool isDecimal(string &num);
 
 //Outras Bases
-string converterParteInteira(double parteInteira);
-string converterParteFracionaria(double parteFracionaria, int maxDigitos = 6);
+string converterParteInteiraOctal(double parteInteira);
+string converterParteFracionariaOctal(double parteFracionaria, int maxDigitos = 6);
 string deciToOctal(double numero);
+string converterParteInteiraHexa(double parteInteira);
+string converterParteFracionariaHexa(double parteFracionaria, int maxDigitos = 6);
+string deciToHexa(double numero);
 
 //Binario
 string decimalBinary(int decimal);
