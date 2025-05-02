@@ -234,6 +234,7 @@ string conversorbase_soperacao(string num){
     }
       
     else if(base_s == 16){
+        string res = deciToHexa((baseToDecimalfloat(num, base_e)));
       return res;
     }
     else{
@@ -252,7 +253,7 @@ string sum(string &num1,string &num2, int base1, int base2){
 
   cout << "TESTE: " << sum << endl;
 
-  string resultado = to_string(sum);
+  string resultado = doubletostring(sum);
 
   string sumconverted = conversorbase_soperacao(resultado);
   return sumconverted;
