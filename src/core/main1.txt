@@ -1,0 +1,241 @@
+//Antigo main do backend
+#include <iostream>
+#include "functions.hpp"
+#include "colors.h"
+
+int main(){
+  // Declarar variaveis
+  int opc;         // Opção principal do menu
+  int opc_arit;    // Opção para tipo de operação aritmética
+  int base_s;      // Base de saída para conversão
+  int base_e;      // Base de entrada (do primeiro número)
+  int base_e2;     // Base de entrada (do segundo número, em operações)
+  int tipo_bin;    // Tipo de binário (sem sinal, sinal magnitude, complemento de 1 ou 2)
+  
+  // Variáveis para entrada e resultado
+  string num =  "";
+  string num1 = "";
+  string num2 = "";
+  string res = "";
+  string binary = "";
+  
+  for(;;){
+    cout << GREEN << "BitwiseWizard" << RESET << endl << endl;
+    cout << "[1] - Converter bases." << endl;
+    cout << "[2] - Operacoes aritmeticas." << endl;
+    cout << "[0] - Sair. " << endl;
+    cout << ">> ";
+    
+    cin >> opc;
+    cout << endl;
+    
+    // CONVERSOR DE BASES
+    if(opc == 1){
+      cout << BOLD << "CONVERSOR DE BASES" << RESET << endl << endl;
+      cin.ignore();
+      cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+      cout << "Digite o numero: ";
+      getline(cin, num);
+
+      base_e = detectBase(num); // Detecta base do número
+      if(base_e == 0){
+        cout << "Numero invalido" << endl;
+        continue;
+      }
+
+      cout << "Digite a base de saida (2, 8, 10, 16): ";
+      cin >> base_s;
+      
+
+      if(base_e == base_s){ // Verifica se bases são iguais
+        cout << "Bases iguais" << endl << endl;
+        continue;
+      } 
+      else{
+        if(base_s == 2){ // CASO BASE DE SAÍDA SEJA BINÁRIA
+          cout << "Escolha o formato" << endl;
+          cout << "[1] - Binario sem sinal" << endl;
+          cout << "[2] - Sinal magnetude" << endl;
+          cout << "[3] - Complemento de 1" << endl;
+          cout << "[4] - Complemento de 2" << endl;
+          cout << "[0] - Sair" << endl;
+          cout << ">> ";
+          cin >> tipo_bin;
+
+          // Executa a conversão de acordo com tipo binário e tipo de número (float/int)
+          if(tipo_bin == 1){
+            if(isFloat(num, base_e)){
+              binary = floatdecimalBinary(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = decimalBinary(baseToDecimal(num, base_e));
+            }
+          }
+          else if(tipo_bin == 2){
+            if(isFloat(num, base_e)){
+              binary = toSignedMagnitudefloat(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = toSignedMagnitude(baseToDecimal(num, base_e));
+            }
+          }
+          else if(tipo_bin == 3){
+            if(isFloat(num, base_e)){
+              binary = toOnesComplementfloat(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = toOnesComplement(baseToDecimal(num, base_e));
+            }
+          }
+          else if(tipo_bin == 4){
+            if(isFloat(num, base_e)){
+              binary = toTwosComplementfloat(baseToDecimalfloat(num, base_e));
+            }
+            else{
+              binary = toTwosComplement(baseToDecimal(num, base_e));
+            }
+          }
+          else if(tipo_bin == 0){
+            cout << RED << "Saindo............................" << RESET << endl;
+            break;
+          }
+          else{
+            cout << RED << "Opcao invalida" << RESET << endl;
+            continue;
+          }
+
+          // Exibe resultado da conversão
+          cout << BOLD <<  num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+          cout << BOLD << "Resultado: " << RESET << binary << endl << endl;
+          
+          continue;
+        }
+        //CONVERTE BINARIO PARA OCTAL E HEXADECIMAL/ ou decimal para alguma dessas
+        else if(base_s == 8){
+            string octal = deciToOctal((baseToDecimalfloat(num, base_e)));
+            
+        cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+        cout << BOLD << "Resultado: " << RESET << octal << endl << endl;
+          continue;
+        }
+          
+        else if(base_s == 10){
+            string decimal = doubletostring((baseToDecimalfloat(num, base_e)));
+          
+          cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+          cout << BOLD << "Resultado: " << RESET << decimal << endl << endl;
+          continue;
+        }
+        else if(base_s == 16){
+            string hexa = deciToHexa((baseToDecimalfloat(num, base_e)));
+            
+            cout << BOLD << num << RESET << " da base " << BOLD << base_e << RESET << " para a base " << BOLD << base_s << RESET << endl;
+            cout << BOLD << "Resultado: " << RESET << hexa << endl << endl;
+          continue;
+        }
+        else{
+          cout << "Base não comportada" << endl << endl; // Base de saída inválida
+          continue;
+        }
+      }
+      continue;
+    }
+    // OPERAÇÕES ARITMÉTICAS
+    else if(opc == 2){
+      cout << BOLD << "OPERACOES ARITMETICAS" <<  RESET << endl;
+      cin.ignore();
+      cout << "Qual operacao aritimetica vai ser realizada?" << endl;
+      cout << "1. Soma, 2. subtracao, 3. multiplicacao ou 4. divisao?" <<endl;
+      cin >> opc_arit;
+
+      // SOMA
+      if (opc_arit == 1){
+        cout << BOLD << "SOMA" <<  RESET << endl;
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
+
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = sum(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " + " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
+      }
+
+      // SUBTRAÇÃO
+      else if(opc_arit == 2){
+        cout << BOLD << "SUBTRACAO" <<  RESET << endl;
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
+
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = sub(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " - " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
+      }
+
+      // MULTIPLICAÇÃO
+      else if(opc_arit == 3){
+        cout << BOLD << "MULTIPLICACAO" <<  RESET << endl;
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
+
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = mult(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " * " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
+      }
+
+      // DIVISÃO
+      else if(opc_arit == 4){
+        cout << BOLD << "DIVISAO" <<  RESET << endl;
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o primeiro numero da operacao: ";
+        cin.ignore();
+        getline(cin, num1);
+
+        cout << "Binario (0b), Octal (0), Hexadecimal(0x)" << endl;
+        cout << "Digite o segundo numero da operacao: ";
+        getline(cin, num2);
+      
+        base_e = detectBase(num1);
+        base_e2 = detectBase(num2);
+
+        res = div(num1, num2, base_e, base_e2);
+        cout << BOLD << num1 << RESET << " / " << BOLD << num2 << RESET << " = " << BOLD << res << RESET << endl;
+      }
+      else{ // Opção aritmética inválida
+        cout << RED << "Opcao invalida" <<  RESET << endl;
+        break;
+      }
+    }
+    else if(opc == 0){ // SAIR DO PROGRAMA
+      cout << RED << "Saindo............................" << RESET << endl;
+      break;
+    }
+    else { // OPÇÃO INVÁLIDA NO MENU PRINCIPAL
+      cout << RED << "Opcao invalida" << RESET << endl;
+      continue;
+    }
+  }
+  return 0;
+}

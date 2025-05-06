@@ -1,0 +1,3 @@
+C:/Users/clara/OneDrive/Faculdade/2 Semestre/DEC_7123/BitwiseWizard/build/CMakeFiles/BitwiseWizard.dir
+C:/Users/clara/OneDrive/Faculdade/2 Semestre/DEC_7123/BitwiseWizard/build/CMakeFiles/edit_cache.dir
+C:/Users/clara/OneDrive/Faculdade/2 Semestre/DEC_7123/BitwiseWizard/build/CMakeFiles/rebuild_cache.dir

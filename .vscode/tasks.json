@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar e Rodar",
+      "type": "shell",
+      "command": "g++ back_end/main.cpp back_end/functions.cpp -o bitwisewizard; if ($?) { ./bitwisewizard }",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
+// Fazer para saber em qual lugar ta rodando?
