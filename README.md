@@ -92,8 +92,8 @@ Funcionalidades da interface:
 
 ```
 📂 BitwiseWizard/
+├── main.cpp             // Menu principal (terminal)
 ├── src/
-│   ├── main.cpp         // Menu principal (terminal)
 │   ├── gui.cpp          // Lógica da interface com Dear ImGui
 │   ├── functions.cpp    // Funções de conversão e operações
 │   ├── functions.hpp
