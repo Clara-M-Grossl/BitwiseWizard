@@ -1,17 +1,12 @@
 # 🧙‍♂️ BitwiseWizard
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#%EF%B8%8F-bitwisewizard)
-
 **Um mago das conversões e operações entre bases numéricas... agora com interface estilosa usando Dear ImGui!**
 
 Se você já quis somar dois números em hexadecimal, dividir binários, ou só mostrar que sabe o que é complemento de dois, esse é o seu grimório digital!
 
 ## ✨ O que é isso?
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-o-que-%C3%A9-isso)
-
 O **BitwiseWizard** é uma aplicação C++ mágica que:
-
 - Converte números entre binário, octal, decimal e hexadecimal 🌀
 - Suporta ponto flutuante e números negativos 🌊
 - Permite escolher representações binárias como:
@@ -21,34 +16,23 @@ O **BitwiseWizard** é uma aplicação C++ mágica que:
   - Complemento de 2
 - Faz operações aritméticas (soma, subtração, multiplicação e divisão) direto entre diferentes bases 🔮
 
-E o melhor: com interface gráfica feita em **Dear ImGui** , pra você conjurar seus cálculos com estilo!
+E o melhor: com interface gráfica feita em **Dear ImGui**, pra você conjurar seus cálculos com estilo!
 
 ---
 
 ## 🧪 Funcionalidades
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-funcionalidades)
-
 ### 🔄 Conversor de bases
-
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-conversor-de-bases)
-
 - Detecta automaticamente a base de entrada (`0b` binário, `0` octal, `0x` hexadecimal ou decimal puro)
 - Converte para qualquer outra base (2, 8, 10, 16)
 - Oferece diferentes representações ao converter para binário
 
 ### ➕ Operações entre bases
-
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-opera%C3%A7%C3%B5es-entre-bases)
-
 - Aceita dois números de **qualquer base**
 - Realiza a operação e te mostra o resultado na base desejada
 - Simplesmente mágico.
 
 ### 💻 Interface Gráfica (GUI)
-
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-interface-gr%C3%A1fica-gui)
-
 - Desenvolvida com **Dear ImGui**
 - Rápida, leve, intuitiva
 - Perfeita para estudantes, curiosos, e entusiastas de computação de baixo nível
@@ -56,8 +40,6 @@ E o melhor: com interface gráfica feita em **Dear ImGui** , pra você conjurar 
 ---
 
 ## 🧰 Requisitos
-
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-requisitos)
 
 - **C++17 ou superior**
 - **Dear ImGui** (você pode usar com SDL2, GLFW ou qualquer binding que preferir)
@@ -68,18 +50,16 @@ E o melhor: com interface gráfica feita em **Dear ImGui** , pra você conjurar 
 
 ## 🚀 Como rodar
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-como-rodar)
-
 1. Clone o repositório:
-
-```shell
-git clone xxxxxxxxx
+```bash
+git clone https://github.com/Clara-M-Grossl/BitwiseWizard.git
 cd BitwiseWizard
 ```
 
-2. Compile: Se estiver usando CMake:
+2. Compile:
+Se estiver usando CMake:
 
-```shell
+```bash
 mkdir build
 cd build
 cmake ..
@@ -87,8 +67,7 @@ make
 ```
 
 3. Rode o feitiço:
-
-```shell
+```bash
 ./BitwiseWizard
 ```
 
@@ -98,12 +77,9 @@ make
 
 ## 🎨 Interface com Dear ImGui
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-interface-com-dear-imgui)
-
-A GUI do BitwiseWizard foi criada com a biblioteca **Dear ImGui** , permitindo uma experiência dinâmica e agradável.
+A GUI do BitwiseWizard foi criada com a biblioteca **Dear ImGui**, permitindo uma experiência dinâmica e agradável.
 
 Funcionalidades da interface:
-
 - Seleção de base via botões
 - Caixas de texto para entrada dos números
 - Resultados visíveis instantaneamente
@@ -113,8 +89,6 @@ Funcionalidades da interface:
 ---
 
 ## 📁 Estrutura do Projeto
-
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-estrutura-do-projeto)
 
 ```
 📂 BitwiseWizard/
@@ -132,8 +106,6 @@ Funcionalidades da interface:
 
 ## 🧠 Por que usar?
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-por-que-usar)
-
 - Aprender como diferentes sistemas de numeração funcionam
 - Visualizar representações binárias com e sem sinal
 - Treinar conceitos de ponto flutuante e operações entre bases
@@ -142,15 +114,22 @@ Funcionalidades da interface:
 ---
 
 ## 👨‍💻 Equipe
+Clara Marcela Grossl  
+E-mail: claramgrossl22@gmail.com  
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-equipe)
+Luan Gabriel  
+E-mail: luangabriel27@icloud.com  
 
-Clara Luan Isadora José
+Isadora da Costa Viana  
+E-mail: isadoracv@outlook.com  
+
+José Vitor de Lara Miranda  
+E-mail: jose.vlm@grad.ufsc.br  
 
 ---
 
 ## 🪄 Licença
 
-[](https://github.com/Clara-M-Grossl/BitwiseWizard?tab=readme-ov-file#-licen%C3%A7a)
-
 Este projeto é open-source sob a licença MIT. Use, modifique e compartilhe à vontade!
+
+---
