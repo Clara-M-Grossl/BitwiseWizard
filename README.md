@@ -92,15 +92,16 @@ Funcionalidades da interface:
 
 ```
 📂 BitwiseWizard/
-├── main.cpp             // Menu principal (terminal)
-├── src/
-│   ├── gui.cpp          // Lógica da interface com Dear ImGui
-│   ├── functions.cpp    // Funções de conversão e operações
-│   ├── functions.hpp
-│   └── colors.h         // Estilos do terminal
-├── CMakeLists.txt
-├── README.md
-```
+├── main.cpp              // Menu principal (modo terminal)
+├── assets.cpp            // Funções auxiliares (formatação, utilitários)
+├── build/                // Diretório de build (gerado após compilação)
+├── src/                  // Código-fonte principal
+│   ├── gui/              // Interface gráfica com Dear ImGui
+│   ├── core/             // Lógica de conversão e operações (back-end)
+│   ├── thirdparty/       // Bibliotecas externas (ex: Dear ImGui)
+├── build.bat             // Script para compilação no Windows
+├── CMakeLists.txt        // Configuração do projeto para o CMake
+├── README.md             // Documentação do projeto
 
 ---
 
