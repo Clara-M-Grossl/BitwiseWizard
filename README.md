@@ -103,6 +103,8 @@ Funcionalidades da interface:
 ├── CMakeLists.txt        // Configuração do projeto para o CMake
 ├── README.md             // Documentação do projeto
 
+```
+
 ---
 
 ## 🧠 Por que usar?
